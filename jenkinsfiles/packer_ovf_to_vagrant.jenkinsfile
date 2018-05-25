@@ -10,6 +10,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 echo "${env.BUILD_ID}"
+                sh "packer build -var-file=variable.json packer_jsons/packer_ovf_to_vagrant.json"
             }
         }
         stage('Test') {
