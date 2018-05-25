@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: False
+  roles:
+    - groups
+    - users
+    - sudoers
+    - yum
+    - sshd
