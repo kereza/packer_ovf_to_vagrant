@@ -11,6 +11,7 @@ pipeline {
                 echo 'Building..'
                 echo "${env.BUILD_ID}"
                 git credentialsId: 'personal_git', url: 'git@github.com:kereza/packer_ansible_roles.git'
+                git credentialsId: 'personal_git', url: 'git@github.com:kereza/packer_ovf_to_vagrant.git'
             }
         }
         stage('Test') {
