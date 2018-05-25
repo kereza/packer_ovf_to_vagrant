@@ -1,0 +1,22 @@
+---
+# tasks file for jenkins
+- name: install specific version of Jenkins
+  yum:
+    name: "{{ version }}"
+    state: present
+
+- name: Service jenkins
+  service:
+   name: jenkins
+   state: started
+   enabled: true
+  
+- name: Enable Jenkins port on the firewall
+  firewalld:
+    port: 8080/tcp
+    permanent: true
+    state: enabled
+  notify: restart firewalld
+
+
+

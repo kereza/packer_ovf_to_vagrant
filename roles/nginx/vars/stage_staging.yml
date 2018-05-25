@@ -1,0 +1,5 @@
+---
+
+domain: app-staging.com
+cluster_name: staging-appcluster
+

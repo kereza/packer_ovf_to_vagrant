@@ -1,0 +1,21 @@
+---
+# tasks file for yum
+- name: Update all the packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Install all the initial necessary packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - vim
+    - wget
+    - git
+    - curl
+    - net-tools
+    - telnet
+    - epel-release
+    - zip
+    - unzip 

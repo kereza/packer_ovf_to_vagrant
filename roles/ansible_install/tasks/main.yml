@@ -1,0 +1,6 @@
+---
+# tasks file for ansible_install
+- name: install specific version of Ansible
+  yum:
+    name: "{{ version }}"
+    state: present

@@ -1,0 +1,6 @@
+---
+# tasks file for yum
+- name: Install Java
+  yum:
+    name: "{{ java_version }}"
+    state: present

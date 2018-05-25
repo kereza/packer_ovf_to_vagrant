@@ -1,0 +1,25 @@
+---
+# vars file for users
+
+users:
+ kerezov:
+  comment: Ivan Kerezov
+  groups: wheel, sadmins
+  state: present
+  force: no
+ ivanov:
+  comment: Stefan Ivanov
+  groups: wheel, sadmins
+  state: present
+  force: no
+ dimitrov:
+  comment: Evelin Dimitrov
+  groups: sadmins
+  state: present
+  force: no
+ gurov:
+  comment: Evelin Gurvo
+  groups: devs
+  state: present
+  force: no
+

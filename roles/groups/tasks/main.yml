@@ -1,0 +1,8 @@
+---
+# tasks file for groups
+
+- name: Add groups
+  group:
+   name: "{{ item.key }}"
+   state: "{{ item.value.state }}"
+  with_dict: "{{ grp }}"

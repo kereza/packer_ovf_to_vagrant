@@ -1,0 +1,5 @@
+---
+
+domain: app-prod.com
+cluster_name: prod-appcluster
+

@@ -1,0 +1,11 @@
+---
+# tasks file for jenkins
+- name: Add Jenkins repo
+  become: yes
+  yum_repository:
+    name: "{{ item.key }}"
+    description: "{{ item.value.description }}"
+    baseurl: "{{ item.value.baseurl }}"
+    gpgkey: "{{ item.value.gpgkey }}"
+    gpgcheck: yes
+  with_dict: "{{ repos }}"

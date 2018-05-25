@@ -1,0 +1,39 @@
+---
+# tasks file for users
+- block:
+  - name: Add users
+    user:
+     name: "{{ item.key }}"
+     comment: "{{ item.value.comment }}"
+     state: "{{ item.value.state }}"
+     force: "{{ item.value.force }}"
+     groups: "{{ item.value.groups }}"
+    with_dict: "{{ users }}"
+    ignore_errors: yes
+
+  - name: Remove user directories if the user is absent
+    shell: rm -rf /home/{{ item.key }}
+    when: item.value.force
+    with_dict: "{{ users }}"
+    tags:
+     - testtag
+
+  - name: Make sure that the SSH directory exist
+    when: not item.value.force
+    file:
+     path: /home/{{ item.key }}/.ssh
+     state: directory
+     owner: "{{ item.key }}"
+     group: "{{ item.key }}"
+     mode: 0700
+    with_dict: "{{ users }}"
+
+  - name: Copy the public keys of the users
+    when: not item.value.force
+    copy:
+     src: keys/id_rsa_{{ item.key }}.pub
+     dest: /home/{{ item.key }}/.ssh/authorized_keys
+     owner: "{{ item.key }}"
+     group: "{{ item.key }}"
+     mode: 0600
+    with_dict: "{{ users }}"

@@ -1,0 +1,4 @@
+---
+# vars file for jenkins
+version:
+  - jenkins-2.107.3-1.1

@@ -1,0 +1,19 @@
+---
+# tasks file for hosts
+- name: Add hosts for PROD
+  template:
+   src: hosts.prod.j2
+   dest: /etc/hosts
+   owner: root
+   group: root
+   mode: 0644
+  when: ansible_nodename.split('.')[1] == "prod"
+
+- name: Add hosts for DEV
+  template:
+   src: hosts.dev.j2
+   dest: /etc/hosts
+   owner: root
+   group: root
+   mode: 0644
+  when: ansible_nodename.split('.')[1] == "dev"

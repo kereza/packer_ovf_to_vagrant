@@ -1,0 +1,8 @@
+---
+grp:
+  sadmins:
+    state: present
+  jadmins:
+    state: present
+  devs:
+    state: present

@@ -1,0 +1,10 @@
+---
+# tasks file for initial_network
+- name: Copy sshd_config file
+  copy:
+    src: files/sshd_config
+    dest: /etc/ssh/sshd_config
+    mode: 0600
+    owner: root
+    group: root
+  notify: restart sshd

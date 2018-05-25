@@ -1,0 +1,4 @@
+---
+# vars file for ansible_install
+version:
+  - ansible-2.5.3
