@@ -4,6 +4,7 @@ pipeline {
    environment {
         AWS_SECRET_KEY_ID = credentials('aws_secret_key')
         AWS_ACCESS_KEY_ID = credentials('aws_access_key')
+        SSH_KEY = credentials('ssh_private_key')
     }
     
     stages {
@@ -11,7 +12,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 echo "${env.BUILD_ID}"
-                sh "packer build -var 'secret_key=${AWS_SECRET_KEY_ID}' -var 'secret_access=${AWS_ACCESS_KEY_ID}'  packer_jsons/packer_ovf_to_vagrant.json"
+                sh "packer build -var 'secret_key=${AWS_SECRET_KEY_ID}' -var 'access_key=${AWS_ACCESS_KEY_ID}' -var 'ssh_private_key_file=${SSH_KEY}' packer_jsons/packer_ovf_to_vagrant.json"
             }
         }
         stage('Test') {
