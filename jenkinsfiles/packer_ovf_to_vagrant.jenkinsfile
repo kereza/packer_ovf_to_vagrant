@@ -6,9 +6,13 @@ pipeline {
               withCredentials([file(credentialsId: 'var_json', variable: 'var_json_ke'), \
               sshUserPrivateKey(credentialsId: 'personal_git', keyFileVariable: 'ssh_key', passphraseVariable: '', usernameVariable: '')]) {
                 echo 'Building..'
-                echo "${env.BUILD_ID}"
-                sh "packer build -var-file='$var_json_ke' -var 'ssh_private_key_file=$ssh_key' packer_jsons/packer_ovf_to_vagrant.json"
+                ansiColor('vga') {
+                    sh "packer build -var-file='$var_json_ke' \
+                    -var 'ssh_private_key_file=$ssh_key' \
+                    -var 'build_id=${env.BUILD_ID}' \
+                    packer_jsons/packer_ovf_to_vagrant.json"
                 }
+              }
                 
             }
         }
