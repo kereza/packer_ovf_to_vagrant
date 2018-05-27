@@ -17,7 +17,7 @@ pipeline {
                 file(credentialsId: 'var_json', variable: '')]) {
                 echo 'Building..'
                 echo "${env.BUILD_ID}"
-                sh "packer build -var-file=$var_json packer_jsons/packer_ovf_to_vagrant.json"
+                sh "packer build -var-file='$var_json' packer_jsons/packer_ovf_to_vagrant.json"
                 }
                 
             }
