@@ -9,7 +9,7 @@
             "instance_type": "t2.micro",
             "ssh_username": "kerezov",
             "ssh_private_key_file": "{{user `ssh_private_key_file`}}",
-            "ami_name": "aws_main_{{timestamp}}"
+            "ami_name": "aws_main_{{user `build_id`_timestamp}}"
         }
         ],
     "provisioners": [
