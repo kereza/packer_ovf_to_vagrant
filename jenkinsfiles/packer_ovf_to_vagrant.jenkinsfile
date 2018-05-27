@@ -1,13 +1,5 @@
 pipeline {
     agent any
-    
-   environment {
-        AWS_SECRET_KEY_ID = credentials('aws_secret_key')
-        AWS_ACCESS_KEY_ID = credentials('aws_access_key')
-        SSH_KEY = credentials('ssh_private_key')
-   }
-
-    
     stages {
         stage('Build') {
             steps {
@@ -22,7 +14,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                ansiColor('vga') {
+                echo 'something that outputs ansi colored stuff'
+                }
             }
         }
         stage('Deploy') {
