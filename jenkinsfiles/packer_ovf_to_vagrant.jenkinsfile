@@ -5,6 +5,10 @@ pipeline {
         AWS_SECRET_KEY_ID = credentials('aws_secret_key')
         AWS_ACCESS_KEY_ID = credentials('aws_access_key')
         SSH_KEY = credentials('ssh_private_key')
+        withCredentials([sshUserPrivateKey(credentialsId: 'personal_git', keyFileVariable: 'ssh_private_key', passphraseVariable: '', usernameVariable: '')]) {
+    // some block
+}
+
     }
     
     stages {
@@ -12,7 +16,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 echo "${env.BUILD_ID}"
-                sh "packer build -var 'secret_key=${AWS_SECRET_KEY_ID}' -var 'access_key=${AWS_ACCESS_KEY_ID}' -var 'ssh_private_key_file=${SSH_KEY}' packer_jsons/packer_ovf_to_vagrant.json"
+                sh "packer build -var 'secret_key=${AWS_SECRET_KEY_ID}' -var 'access_key=${AWS_ACCESS_KEY_ID}' -var 'ssh_private_key_file=$ssh_private_key' packer_jsons/packer_ovf_to_vagrant.json"
             }
         }
         stage('Test') {
