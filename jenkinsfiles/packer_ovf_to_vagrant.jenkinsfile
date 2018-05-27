@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 echo "${env.BUILD_ID}"
-                sh "packer build -var 'secret_key=${AWS_SECRET_KEY_ID}' 'secret_access=${AWS_ACCESS_KEY_ID}'  packer_jsons/packer_ovf_to_vagrant.json"
+                sh "packer build -var 'secret_key=${AWS_SECRET_KEY_ID}' -var 'secret_access=${AWS_ACCESS_KEY_ID}'  packer_jsons/packer_ovf_to_vagrant.json"
             }
         }
         stage('Test') {
