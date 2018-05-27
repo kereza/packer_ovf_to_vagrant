@@ -1,16 +1,17 @@
 pipeline {
     agent any
     
-    environment {
-        CC = 'clang'
-    }    
+   environment {
+        AWS_SECRET_KEY_ID = credentials('aws_secret_key')
+        AWS_ACCESS_KEY_ID = credentials('aws_access_key')
+    }
     
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
                 echo "${env.BUILD_ID}"
-                sh "packer build -var-file=variables.json packer_jsons/packer_ovf_to_vagrant.json"
+                sh "packer build -var 'secret_key=${AWS_SECRET_KEY_ID}' 'secret_access=${AWS_ACCESS_KEY_ID}'  packer_jsons/packer_ovf_to_vagrant.json"
             }
         }
         stage('Test') {

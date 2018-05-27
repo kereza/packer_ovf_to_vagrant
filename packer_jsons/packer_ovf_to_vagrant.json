@@ -4,18 +4,19 @@
             "type": "amazon-ebs",
             "access_key": "{{user `aws_access_key`}}",
             "secret_key": "{{user `aws_secret_key`}}",
-            "region": "{{user `aws_region`}}",
-            "source_ami": "ami-003fd56f",
-            "ssh_pty": true,
+            "region": "eu-central-1",
+            "source_ami": "ami-63082288",
             "instance_type": "t2.micro",
-            "ssh_username": "centos",
+            "ssh_username": "kerezov",
+            "ssh_private_key_file": "/Users/ivan.kerezov/.ssh/id_rsa",
             "ami_name": "aws_main_{{timestamp}}"
         }
         ],
     "provisioners": [
             {
                 "type": "ansible",
-                "playbook_file": "./playbook.yml"
+                "playbook_file": "./playbook.yml",
+                "user": "kerezov"
             }
         ]
 }
