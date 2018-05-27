@@ -13,10 +13,11 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'aws_access_key', variable: 'aws_access_key'), \
                 string(credentialsId: 'aws_secret_key', variable: 'aws_secret_key'), \
-                sshUserPrivateKey(credentialsId: 'personal_git', keyFileVariable: 'ssh_private_key', passphraseVariable: '', usernameVariable: '')]) {
+                sshUserPrivateKey(credentialsId: 'personal_git', keyFileVariable: 'ssh_private_key', passphraseVariable: '', usernameVariable: ''), \
+                file(credentialsId: 'var_json', variable: '')]) {
                 echo 'Building..'
                 echo "${env.BUILD_ID}"
-                sh "packer build -var 'secret_key=$aws_secret_key' -var 'access_key=$aws_secret_key' -var 'ssh_private_key_file=$ssh_private_key' packer_jsons/packer_ovf_to_vagrant.json"
+                sh "packer build -var-file=$var_json packer_jsons/packer_ovf_to_vagrant.json"
                 }
                 
             }
